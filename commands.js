@@ -57,6 +57,6 @@ let commands = {
             }
         })
     }
- };
+};
 
 module.exports = commands;

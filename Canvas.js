@@ -72,41 +72,29 @@ class Canvas {
         x = parseInt(x);
         y = parseInt(y);
 
-        if (x <= 0 || x > this.width || y <= 0 || y > this.height || this.canvasArea[y][x] === color || this.canvasArea[y][x] === '*') return;
-
-        if (Array.isArray(this.canvasArea[0])) {
-            this.canvasArea[y][x] = color;
-        } else {
-            this.canvasArea[y] = [color];
-        }
-
-        this.fillBucket(x + 1, y-1, color);
-        this.fillBucket(x + 1, y+1, color);
-        this.fillBucket(x -1, y+1, color);
-        this.fillBucket(x+1, y-1, color);
-        // for (let i = y; i <= this._height; i++) {
-        //     for (let j = x; j <= this._width; j++) {
-        //         if (x <= 0 || x > this._width || y <= 0 || y > this._height || this.canvasArea[y-1][x-1] === color || this.canvasArea[y-1][x-1] === '*') {
-        //             return;
-        //         } else {
-        //             if (Array.isArray(this.canvasArea[0])) {
-        //                 this.canvasArea[y][x] = color;
-        //                 this.canvasArea[y+1][x] = color;
-        //                 this.canvasArea[y-1][x] = color;
-        //                 this.canvasArea[y][x+1] = color;
-        //                 this.canvasArea[y][x-1] = color;
+        for (let i = y; i <= this._height; i++) {
+            for (let j = x; j <= this._width; j++) {
+                if (x <= 0 || x > this._width || y <= 0 || y > this._height || this.canvasArea[y][x] === color || this.canvasArea[y][x] === '*') {
+                    return;
+                } else {
+                    if (Array.isArray(this.canvasArea[0])) {
+                        this.canvasArea[y][x] = color;
+                        this.canvasArea[y+1][x] = color;
+                        this.canvasArea[y-1][x] = color;
+                        this.canvasArea[y][x+1] = color;
+                        this.canvasArea[y][x-1] = color;
  
-        //               } else {
-        //                 this.canvasArea[y] = [color];
-        //                 this.canvasArea[y+1] = [color];
-        //                 this.canvasArea[y-1] = [color];
-        //                 this.canvasArea[y] = [color];
-        //                 this.canvasArea[y] = [color];
-        //               }
-        //         }
+                      } else {
+                        this.canvasArea[y] = [color];
+                        this.canvasArea[y+1] = [color];
+                        this.canvasArea[y-1] = [color];
+                        this.canvasArea[y] = [color];
+                        this.canvasArea[y] = [color];
+                      }
+                }
 
-        //     }
-        // }
+            }
+        }
     }
 
 }
