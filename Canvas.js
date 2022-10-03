@@ -51,12 +51,23 @@ class Canvas {
         y1 = parseInt(y1);
         x2 = parseInt(x2);
         y2 = parseInt(y2);
+        if (y1 > y2) {    
+            [y1, y2] = [y2, y1];
+        }
+        if (x1 > x2) {
+            [x1, x2] = [x2, x1];
+        }
         for (let i = y1; i <= y2; i++) {
             if (!this.canvasArea[i]) {
                 this.canvasArea[i] = new Array();
             }
             for (let j = x1; j <= x2; j++) {
-                this.canvasArea[i][j] = sign;
+                if (this.canvasArea[i][j] === '-' || this.canvasArea[i][j] === '|' || j >= this.width || i >= this.height) {
+                    continue;
+                } else {
+                    this.canvasArea[i][j] = sign;
+                }
+                
             }
         }
     }
@@ -69,27 +80,26 @@ class Canvas {
     }
 
     fillBucket (x, y, color) {
-        x = parseInt(x);
-        y = parseInt(y);
+        this.x = parseInt(x);
+        this.y = parseInt(y);
 
-        for (let i = y; i <= this._height; i++) {
-            for (let j = x; j <= this._width; j++) {
-                if (x <= 0 || x > this._width || y <= 0 || y > this._height || this.canvasArea[y][x] === color || this.canvasArea[y][x] === '*') {
-                    return;
+            
+        for (let i = this.x; i <= this.width; i++) {
+            for (let j = this.y; j <= this.height; j++) {
+                if (this.canvasArea[i][j] === '*' || this.canvasArea[i][j] === '-' || this.canvasArea[i][j] === '|') {
+                    continue;
                 } else {
-                    if (Array.isArray(this.canvasArea[0])) {
-                        this.canvasArea[y][x] = color;
-                        this.canvasArea[y+1][x] = color;
-                        this.canvasArea[y-1][x] = color;
-                        this.canvasArea[y][x+1] = color;
-                        this.canvasArea[y][x-1] = color;
+                    if (Array.isArray(this.canvasArea[i][j])) {
+                        this.canvasArea[i][j] = color;
+                        this.canvasArea[i+1][j] = color;
+                        this.canvasArea[i-1][j] = color;
+                        this.canvasArea[i][j+1] = color;
+                        this.canvasArea[i][j-1] = color;
  
                       } else {
-                        this.canvasArea[y] = [color];
-                        this.canvasArea[y+1] = [color];
-                        this.canvasArea[y-1] = [color];
-                        this.canvasArea[y] = [color];
-                        this.canvasArea[y] = [color];
+                        this.canvasArea[j] = [color];
+                        this.canvasArea[j+1] = [color];
+                        this.canvasArea[j-1] = [color];
                       }
                 }
 
@@ -98,5 +108,6 @@ class Canvas {
     }
 
 }
+
 
 module.exports = Canvas;
