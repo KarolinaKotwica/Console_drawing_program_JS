@@ -11,9 +11,10 @@
 <br />
 
 <h2>How to run</h2>
-<p>1. Open window CMD / Git Bash / Terminal in VSC </p>
-<p>2. Navigate to this directory</p>
-<p>3. Run command:</p>
+<p>1. Make sure that you have installed <a href='https://nodejs.org/en/download/' target='_blank'>NodeJs</a></p>
+<p>2. Open window CMD / Git Bash / Terminal in VSC </p>
+<p>3. Navigate to this directory</p>
+<p>4. Run command:</p>
 <code>node index.js</code>
 
 <br /><br />
