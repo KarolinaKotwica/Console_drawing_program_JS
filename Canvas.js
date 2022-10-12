@@ -36,6 +36,7 @@ class Canvas {
     get height() {
         return this._height;
     }
+    
 
     drawCanvas (){
         this.canvasArea.forEach((outerArr) => {
@@ -80,31 +81,39 @@ class Canvas {
     }
 
     fillBucket (x, y, color) {
-        this.x = parseInt(x);
-        this.y = parseInt(y);
+        x = parseInt(x);
+        y = parseInt(y);
 
-            
-        for (let i = this.x; i <= this.width; i++) {
-            for (let j = this.y; j <= this.height; j++) {
-                if (this.canvasArea[i][j] === '*' || this.canvasArea[i][j] === '-' || this.canvasArea[i][j] === '|') {
-                    continue;
-                } else {
-                    if (Array.isArray(this.canvasArea[i][j])) {
-                        this.canvasArea[i][j] = color;
-                        this.canvasArea[i+1][j] = color;
-                        this.canvasArea[i-1][j] = color;
-                        this.canvasArea[i][j+1] = color;
-                        this.canvasArea[i][j-1] = color;
- 
-                      } else {
-                        this.canvasArea[j] = [color];
-                        this.canvasArea[j+1] = [color];
-                        this.canvasArea[j-1] = [color];
-                      }
-                }
-
+            let longest_border;
+            if (this.height>this.width) {
+                longest_border = this.height-2;
+            } else {
+                longest_border = this.width-2;
             }
+            console.log(longest_border);
+
+            for (let z = 1; z <= longest_border; z++) {
+
+                for (let i = y-z; i <= y+z; i++) {
+                
+                    if (i<1) i = 1;
+
+                    if (i>this.height-2) break;
+
+                    for(let j = x-z; j <= x+z; j++){
+                        if(this.canvasArea === null || this.canvasArea.length < 1 || this.canvasArea[y][x] === "*") {
+                            continue;
+                        }
+                        if (j < 1) j = 1;
+
+                        if (j>this.width-2) break;
+
+                        this.canvasArea[i][j] = color;
+                    
+                    }
+                }
         }
+        
     }
 
 }
