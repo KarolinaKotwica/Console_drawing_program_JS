@@ -90,7 +90,6 @@ class Canvas {
             } else {
                 longest_border = this.width-2;
             }
-            console.log(longest_border);
 
             for (let z = 1; z <= longest_border; z++) {
 
@@ -101,13 +100,14 @@ class Canvas {
                     if (i>this.height-2) break;
 
                     for(let j = x-z; j <= x+z; j++){
-                        if(this.canvasArea === null || this.canvasArea.length < 1 || this.canvasArea[y][x] === "*") {
-                            continue;
-                        }
+                        
                         if (j < 1) j = 1;
 
                         if (j>this.width-2) break;
-
+                        
+                        if(this.canvasArea === null || this.canvasArea.length < 1 || this.canvasArea[i][j] === "*") {
+                            continue;
+                        }
                         this.canvasArea[i][j] = color;
                     
                     }
